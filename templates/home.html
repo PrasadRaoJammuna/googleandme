@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Goog_me APP</title>
+<style>
+    body:{
+        margin: 100px;
+        padding: 100px;
+    }
+
+</style>
+
+</head>
+<body style="margin:20px">
+        {% block content %}
+        <div class="alert alert-warning" role="alert">
+               <h1 style="color: crimson"><center>® All copy rights reserved By Jp.</center></h1>
+         <small style="margin-left:1050px; color:darkmagenta"> Make sure your Internet connection !</small>         
+            </div>
+
+        <div class="spinner-grow" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+        <div class="container-fluid">
+                <div class="alert alert-dark center" role="alert" p-50>
+                <h1>👍 Sentiment 👎</h1>
+                        <form action="{{url_for('sentiment_analysis')}}" method="POST" >
+                                <div class="form-group">
+                                        <label>Enter Text </label>
+                                        <input type="text" class="form-control" name='sent' id="def" aria-describedby="sentHelp" placeholder="Enter some text/review">
+                                        <small id="sentHelp" class="form-text text-muted">We'll find you, what you feel...</small>
+                                </div>
+                        <button type="submit" class="btn btn-success">Are you Ok</button>
+                        </form>
+                
+           <b style="color:royalblue">{{score}}</b>
+           </b>
+        </div>
+        <br>              
+
+        
+
+        <div class="alert alert-success center" role="alert" p-10>
+            <h1>🌐Translation</h1>
+            <form action="{{url_for('translate')}}" method="POST">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Enter Text in any language</label>
+                      <input type="text" class="form-control" name='language' id="language" aria-describedby="lanugageHelp" placeholder="Enter text">
+                      <small id="lanugageHelp" class="form-text text-muted">We are here to help you...Translates in English</small>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Translate for me</button>
+                    </form>
+                    <br>
+                    {% if not e=="Soory! I can't Understand it." %}
+                    <b style="color: darkgreen">{{data}}</b>
+                     {% else %}
+                    <b style="color:red">{{e}}</b>
+                    {% endif %}
+</div>
+<br>
+
+<div class="alert alert-danger center" role="alert" p-10>
+        <h1>✔Spelling Correction</h1>
+        <form action="{{url_for('correct')}}" method="POST">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Enter wrong Text </label>
+                  <input type="text" class="form-control" name='correct' id="wrong" aria-describedby="wrongHelp" placeholder="Enter wrong text">
+                  <small id="wrongHelp" class="form-text text-muted">We are here to help you...</small>
+
+                </div>
+                <button type="submit" class="btn btn-danger">correct me</button>
+                </form>
+                {% if not e=="Sorry, what is this..! don't have  sense." %}
+                <b style="color: darkgreen">{{correct_Sentence}}</b>
+                 {% else %}
+                <b style="color:red">{{e}}</b>
+                {% endif %}
+</div>
+<br>
+
+<div class="alert alert-warning center" role="alert" p-10>
+        <h1>🎴 Definition</h1>
+        <form action="{{url_for('definition')}}" method="POST">
+                <div class="form-group">
+                  <label>Enter word </label>
+                  <input type="text" class="form-control" name='mean' id="def" aria-describedby="defHelp" placeholder="Enter a word">
+                  <small id="defHelp" class="form-text text-muted">We are here to help you...</small>
+
+                </div>
+                <button type="warning" class="btn btn-dark">Tell me</button>
+                </form>
+                {% if not e =="Sorry, I dont have anything about this." %}
+                {% for i in mean %}
+                        <p style="color:rebeccapurple">-- {{i}}</p>
+                {% endfor %}
+                {% else %}
+                    <b style="color:red">{{e}}</b>
+                    {% endif %}
+</div>
+<br>
+
+</div>
+{% endblock content %}
+</body>
+</html>
